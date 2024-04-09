@@ -33,10 +33,14 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
 
     $info = pathinfo($_FILES['photo']['name']);
     $ext = $info['extension']; // get the extension of the file
-    $newname = "image_".microtime().'.jpg';
-
+    $newname = "image_".microtime().".$ext";
+    $check = getimagesize($_FILES['photo']['tmp_name']);
+    var_dump($check["mime"]);
+//    exit;
+    if (!strstr($check["mime"], "image/")) {
+	die("File is not an image");
+    }
     $target = '/images/'.$_FILES["photo"]['name'];
-
 
 
     move_uploaded_file( $_FILES['photo']['tmp_name'], __DIR__.'/images/'.$_FILES["photo"]['name']);
