@@ -29,6 +29,7 @@ $conn->close();
         <body>
             <h1 align="center">Welcome to world's first free photostock со шлюхами и блэкджеком</h1>
             <h1 align="center"><a href="/upload.php">UPLOAD PHOTO HERE</a></h1>
+	    <h3 align="center"><a href="/delete_photos.php">DELETE PHOTOS HERE</a></h3>
             <?php
             if ($result->num_rows > 0) {
                 // output data of each row
@@ -44,6 +45,7 @@ $conn->close();
 
                     echo "</a>";
                 }
+		// delete photos
             } else {
                 echo "0 results";
             }

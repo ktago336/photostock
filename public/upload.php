@@ -2,7 +2,7 @@
 if ($_SERVER['REQUEST_METHOD']=='GET'):
 ?>
 <h1 align="center">UPLOAD YOUR PHOTO HERE!!!!!!!</h1>
-<form method="POST" enctype="multipart/form-data" action="/upload.php">
+<form method="POST" enctype="multipart/form-data"  action="/upload.php">
     WRITE YOUR PHOTO NAME HERE!!!!!!!<br><input type="text" name="name">
     WRITE YOUR NICKNAME HERE!!!!!!!<br><input type="text" name="nickname">
     SELECT IMAGE HERE<br><input type="file" name="photo">
