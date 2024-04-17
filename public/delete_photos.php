@@ -5,7 +5,7 @@ require '../DB/credentials.php';
 <?php
 if ($_SERVER['REQUEST_METHOD']=='GET'):
 ?>
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form method="POST" action="<?php echo htmlspecialchars('/delete_photos.php');?>">
     Enter password:<br><input type="password" name="pass">    
 <button type="submit">DELETE!!!</button>
 </form>

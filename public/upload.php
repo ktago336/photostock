@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $info = pathinfo($_FILES['photo']['name']);
     $ext = $info['extension']; // get the extension of the file
     $newname = "image_".microtime().".$ext";
+// checl if is not an image
     $check = getimagesize($_FILES['photo']['tmp_name']);
-//check if not an image
     if (!strstr($check["mime"], "image/")) {
 	die("File is not an image");
     }

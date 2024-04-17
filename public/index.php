@@ -1,13 +1,11 @@
 <?php
-$env = json_decode(file_get_contents(__DIR__.'/../.env.json'));
+require '../DB/credentials.php';
+?>
 
-$servername = "localhost";
-$username = $env->DB_USERNAME;
-$password = $env->DB_PASSWORD;
-$dbname = $env->DB_NAME;
+<?php
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli(SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -16,8 +14,6 @@ if ($conn->connect_error) {
 $sql = "SELECT id, name, nickname, upload_date, photo FROM posts";
 $result = $conn->query($sql);
 $conn->close();
-
-
 
 ?>
 
