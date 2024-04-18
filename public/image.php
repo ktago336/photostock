@@ -1,8 +1,11 @@
 <?php
-require '../DB/credentials.php';
+require_once '../DB/credentials.php';
+require '../functions/comments.php'
 ?>
 
 <?php
+make_comment($_POST['comment'], $_GET['id'], $_POST['nickname']);
+
 $id = $_GET['id'];
 
 $conn = new mysqli(SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -21,53 +24,14 @@ catch (Exception $e){
 $conn->close();
 $row = $result->fetch_assoc();
 $photo = $row['photo'];
+$photo_id = $row['id'];
 $name = $row['name'];
 $nickname = $row['nickname'];
 $date = $row['upload_date'];
 ?>
 
 <?php
-function make_comment() {
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$nickname = $_POST['nickname'];
-	$comment_date = date("Y-m-d h:i:sa");
-	$comment = $_POST['comment'];
-
-	$sql = "INSERT INTO comments (text, photo_id, nickname, reg_date)
-VALUES ('$comment', '$id', '$nickname', '$comment_date')";
-
-        if ($conn->query($sql) === FALSE) {
-	    echo "Error: " . $sql . "<br>" . $conn->error;
-	}
-
-    }
-}
-?>
-
-<?php
-function show_comments() {
-    $sql = "SELECT id, text, photo_id, nickname, reg_date FROM comments WHERE photo_id = $id";
-
-    try {
-	    $result = $conn->query($sql);
-    }
-    catch (Exception $e) {
-	echo $e; exit;
-    }
-    $conn->close();
-
-    if ($result->num_rows > 0) {
-	while($row = $result->fetch_assoc()) {
-	    $comment = $row['text'];
-	    $nickname = $row['nickname'];
-	    $comment_date = $row['reg_date'];
-	    echo $nickname . "<br>" . $comment_date . "<br>" . $comment . "<br><hr>";
-	}
-    } else {
-	echo "<br>0 comments";
-    }
-}
 ?>
 
 
@@ -86,8 +50,8 @@ function show_comments() {
     <button type='submit'>Submit</button>
     </form>
     <?php
-    make_comment();
-    show_comments();
+    $comments = get_comments($photo_id);
+    show_comments($comments);
     ?>
     </div>
 
