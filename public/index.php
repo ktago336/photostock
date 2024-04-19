@@ -1,66 +1,17 @@
 <?php
-require '../DB/credentials.php';
-?>
 
-<?php
+use Illuminate\Http\Request;
 
-// Create connection
-$conn = new mysqli(SERVERNAME, DB_USERNAME, DB_PASSWORD, DB_NAME);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+define('LARAVEL_START', microtime(true));
+
+// Determine if the application is in maintenance mode...
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+    require $maintenance;
 }
 
-$sql = "SELECT id, name, nickname, upload_date, photo FROM posts";
-$result = $conn->query($sql);
-$conn->close();
+// Register the Composer autoloader...
+require __DIR__.'/../vendor/autoload.php';
 
-?>
-
-<DOCTYPE html>
-    <html>
-        <head>
-
-        </head>
-        <body>
-            <h1 align="center">Welcome to world's first free photostock со шлюхами и блэкджеком</h1>
-            <h1 align="center"><a href="/upload.php">UPLOAD PHOTO HERE</a></h1>
-	    <h3 align="center"><a href="/delete_photos.php">DELETE PHOTOS HERE</a></h3>
-            <?php
-            if ($result->num_rows > 0) {
-                // output data of each row
-                while($row = $result->fetch_assoc()){
-                    $photo = $row['photo'];
-                    $photo_id = $row['id'];
-
-                    echo "<a href='/image.php?id=$photo_id'>";
-
-                    echo "#".$row['id'] . "<br>";
-                    echo "<img style='height: 300px' src= '$photo' ><br>";
-                    echo $row["name"]. " " . $row["nickname"]. " " . $row["upload_date"] . "<br><hr>";
-
-                    echo "</a>";
-                }
-		// delete photos
-            } else {
-                echo "0 results";
-            }
-            ?>
-
-
-
-
-        </body>
-
-    </html>
-
-
-</DOCTYPE>
-
-
-<?php
-
-
-
-
-?>
+// Bootstrap Laravel and handle the request...
+(require_once __DIR__.'/../bootstrap/app.php')
+    ->handleRequest(Request::capture());
