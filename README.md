@@ -7,6 +7,41 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Deployment guide
+```
+git clone https://github.com/ktago336/photostock.git
+cd photostock
+composer install
+cp .env.example .env
+```
+Make public/ rootDirectory for your webserve<br>
+Change permissions like this
+```
+sudo chown -R www-data:www-data . #being in root of your project instance
+```
+<br>
+Create mysql/maridb database and user
+
+```
+mysql
+create database example_database;
+use example_database;
+create user 'example_user'@'localhost' identified by 'example_password';
+grant all privileges on example_database.* to 'example_user'@'localhost';
+flush privileges;
+exit
+```
+Fill the .env file with newly created databse credentials
+<br>
+Generate app key and test DB connection
+```
+php artisan key:generate
+php artisan migrate
+```
+
+
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
