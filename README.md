@@ -11,6 +11,7 @@
 ```
 git clone https://github.com/ktago336/photostock.git
 cd photostock
+composer install
 cp .env.example .env
 ```
 Make public/ rootDirectory for your webserve<br>
