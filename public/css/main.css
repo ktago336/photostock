@@ -186,6 +186,7 @@ body {
 }
 
 .profile-content {
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -206,7 +207,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     display: flex;
-    align-items: center;
+    align-items: start;
 }
 
 .author-image {

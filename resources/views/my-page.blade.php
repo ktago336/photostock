@@ -7,7 +7,8 @@
     <div class="content">
 
         <div class="top-bar">
-            Павел Дуров
+            {{$profile->name??''}} {{$profile->surname??''}}
+
         </div>
         <div class="container-main" style="margin-top: 0px">
             <div class="profile-header">
@@ -17,7 +18,7 @@
             <div class="profile-content">
                 <div class="d-flex justify-content-between align-items-end border-bottom border-5">
                     <h2 style="margin: 0">
-                        Павел дуров
+                        {{$profile->name??''}} {{$profile->surname??''}}
                     </h2>
                     <div id="show-additional" role="button">Показать подробную информацию</div>
                 </div>
@@ -75,9 +76,9 @@
                 </div>
 
 
-                @for($j=1; $j<5; $j++)
-                    @include('blocks.post')
-                @endfor
+                @foreach($profile->posts as $post)
+                    @include('blocks.post',compact('post'))
+                @endforeach
 
 
 
