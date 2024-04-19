@@ -2,6 +2,8 @@
 
 return [
 
+    'profile_placeholder'=> '/placeholder/profile-placeholder.jpg',
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

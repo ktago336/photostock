@@ -44,4 +44,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function avatar(){
+        //TODO add Images model realisation, Images with is_avatar are array, last is actual
+        return config('app.profile_placeholder');
+    }
 }
