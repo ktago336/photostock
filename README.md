@@ -11,6 +11,8 @@
 ```
 git clone https://github.com/ktago336/photostock.git
 cd photostock
+git init
+git checkout laravel-branch
 composer install
 cp .env.example .env
 ```
