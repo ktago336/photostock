@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('image');
+            $table->boolean('active')->default(1);
+            $table->boolean('is_avatar')->default(0);
+
+            $table->foreignId('imageable_id')->nullable();
+            $table->string('imageable_type')->nullable();
+
+            $table->foreignId('author_id')->nullable();
+
         });
     }
 

@@ -19,4 +19,5 @@ Route::get('/exit',[\App\Http\Controllers\LoginController::class, 'exit'])->name
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/feed', [\App\Http\Controllers\FeedController::class, 'index'])->name('feed');
     Route::get('/my-page', [\App\Http\Controllers\ProfileController::class, 'myPage'])->name('my.page');
+    Route::post('/wall/{id}/create/post',[\App\Http\Controllers\PostController::class, 'createPost'])->name('create.post');
 });

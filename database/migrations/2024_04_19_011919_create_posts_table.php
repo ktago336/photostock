@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->longText('text')->nullable();
+
+            $table->foreignId('author_id')->nullable();
+            $table->string('author_type')->nullable();
         });
     }
 

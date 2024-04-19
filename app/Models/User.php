@@ -4,6 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -48,6 +51,24 @@ class User extends Authenticatable
 
     public function avatar(){
         //TODO add Images model realisation, Images with is_avatar are array, last is actual
-        return config('app.profile_placeholder');
+         return $this->images()->where('is_avatar',1)->latest('id')->first()
+             ??
+             config('app.profile_placeholder');
+    }
+
+
+    public function images():MorphMany{
+        return $this->morphMany(Image::class,'imageable');
+    }
+
+
+    public function posts():MorphMany{
+        return $this->morphMany(Post::class, 'author');
+    }
+
+
+    public function authored(): HasMany
+    {
+        return $this->hasMany(Image::class, 'author_id');
     }
 }

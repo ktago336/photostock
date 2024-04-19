@@ -13,5 +13,17 @@ document.addEventListener('DOMContentLoaded',function (){
             return;
         }
     });
+
+    $("#create-post-toggle").on('click',function (){
+        if(!$("#create-post-form").is(":visible")){
+            $("#create-post-form").show(500);
+            return;
+        }
+
+        if($("#create-post-form").is(":visible")){
+            $("#create-post-form").hide(500);
+            return;
+        }
+    });
 });
 
