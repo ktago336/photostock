@@ -19,15 +19,23 @@
                     <h2 style="margin: 0">
                         Павел дуров
                     </h2>
-                    <div role="button">Показать подробную информацию</div>
+                    <div id="show-additional" role="button">Показать подробную информацию</div>
                 </div>
                 <div class="w-50">
                     @for($j=0;$j<=2;$j++)
-                        <div id="additional-info" class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between">
                             <div class="profile-info">Род деятельности</div>
                             <div class="profile-info">Прикольный</div>
                         </div>
                     @endfor
+                    <div id="additional-info" style="display: none">
+                        @for($j=0;$j<=2;$j++)
+                            <div class="d-flex justify-content-between">
+                                <div class="profile-info">Род деятельности</div>
+                                <div class="profile-info">Прикольный</div>
+                            </div>
+                        @endfor
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-end border-bottom border-top border-5 border-dark category-header">
