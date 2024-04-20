@@ -4,12 +4,11 @@
 @section('title','Feed')
 
 @section('content')
-
     <div class="content">
 
-        @for($i=0; $i<10; $i++)
-            @include('blocks.feed-item')
-        @endfor
+        @foreach(\App\Models\Post::latest()->with(['author', 'author.images'])->get() as $feedPost)
+            @include('blocks.post', ['post'=>$feedPost, 'profile'=>$feedPost->author])
+        @endforeach
 
 
         <!-- More feed items go here -->

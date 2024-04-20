@@ -76,7 +76,7 @@
                 </div>
 
 
-                @foreach($profile->posts as $post)
+                @foreach($profile->posts()->latest()->get() as $post)
                     @include('blocks.post',compact('post'))
                 @endforeach
 
