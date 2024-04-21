@@ -11,4 +11,5 @@
     <link rel="icon" type="image/x-icon" href="/svg/favicon.svg">
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/main.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

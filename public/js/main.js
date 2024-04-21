@@ -64,5 +64,68 @@ document.addEventListener('DOMContentLoaded',function (){
 
         });
     });
+
+
+    //Обработка отрпавки сообщения
+    $("#sendMessage").on('click',function (){
+        sendMessage();
+    })
 });
+//Добавление сообщения в чат
+function addMessage(me, text, name, image, time){
+    if(me){
+        var msghtml = `
+                <div class="my-message d-flex justify-content-end">
+                    <img class="author-image" src="${image}" alt="Author Image">
+                    <div class="post-content">
+                        <p><b>Вы: </b>${text}</p>
+                        <div class="post-info d-flex justify-content-between align-items-end">
+                            <span class="publish-date">${time}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+    else{
+        var msghtml = `
+                <div class="their-message d-flex justify-content-end">
+                    <img class="author-image" src="${image}" alt="Author Image">
+                    <div class="post-content">
+                        <p><b>${name}: </b>${text}</p>
+                        <div class="post-info d-flex justify-content-between align-items-end">
+                            <span class="publish-date">${time}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+
+    $("#chat").append(msghtml);
+}
+
+function sendMessage(){
+    var text = $("#textToSend").val();
+    $("#textToSend").val('')
+    if (!text || text===''){
+        return;
+    }
+    $.ajax({
+        url: '/send-message',
+        type: 'post',
+        data: {
+            to_id: to_id??0,
+            text: text
+        },
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+        success: function (data) {
+            addMessage(true, text, 'Вы', ProfileImage, 'Только что')
+        },
+        error: function (data) {
+            console.log(data)
+        }
+
+    });
+}
 

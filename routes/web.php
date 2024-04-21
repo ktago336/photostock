@@ -21,5 +21,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/my-page', [\App\Http\Controllers\ProfileController::class, 'myPage'])->name('my.page');
     Route::post('/wall/{id}/create/post',[\App\Http\Controllers\PostController::class, 'createPost'])->name('create.post');
     Route::post('/like',[\App\Http\Controllers\LikeController::class, 'like'])->name('like.post');
+
+    Route::get('/messages',[\App\Http\Controllers\MessageController::class, 'messages'])->name('messages');
+    Route::get('/chat/{to_id}',[\App\Http\Controllers\MessageController::class, 'chat'])->name('chat');
+    Route::post('/send-message', [\App\Http\Controllers\MessageController::class, 'sendMessage'])->name('message.send');
 });
 

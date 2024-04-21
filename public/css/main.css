@@ -192,14 +192,6 @@ body {
 
 /* Add more styles for posts, friends, etc. */
 
-/* Example post style */
-.post {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
 .post {
     background-color: #f9f9f9;
     padding: 10px;
@@ -208,7 +200,31 @@ body {
     border-radius: 5px;
     display: flex;
     align-items: start;
+    text-decoration: none;
+    cursor: pointer;
 }
+
+.my-message {
+    background-color: transparent;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: start;
+    text-decoration: none;
+}
+
+.their-message {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: start;
+    text-decoration: none;
+}
+
 
 .author-image {
     width: 40px;
@@ -354,6 +370,27 @@ body {
 }
 .log-form .forgot:hover {
     color: #1ba0a9;
+}
+
+
+.firm-btn {
+    display: inline-block;
+    background: #1f83bf;
+    border: 1px solid #1ba0a9;
+    padding: .5em 2em;
+    color: white;
+    margin-right: .5em;
+    box-shadow: inset 0px 1px 0px rgba(255,255,255,0.2);
+}
+.firm-btn {
+    background: #23cad5;
+}
+.firm-btn  {
+    background: #1fb5bf;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.1);
+}
+.firm-btn {
+    outline: none;
 }
 
 
