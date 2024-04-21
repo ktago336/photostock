@@ -21,7 +21,7 @@ class Image extends Model
         if (!$file) {
             return '';
         }
-        $path = '/uploads/'.Storage::disk('public_uploads')->put('images', $file);
+        $path = '/uploads/' . Storage::disk('public_uploads')->put('images', $file);
         $image = new self();
         $image->image = $path;
         return $image;

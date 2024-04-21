@@ -67,6 +67,17 @@ class User extends Authenticatable
     }
 
 
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class, 'user_id');
+    }
+
+
+    public function wall(): MorphMany{
+        return $this->morphMany(Post::class, 'postable', 'postable_type', 'postable_id');
+    }
+
+
     public function authored(): HasMany
     {
         return $this->hasMany(Image::class, 'author_id');

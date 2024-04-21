@@ -22,6 +22,8 @@ class PostController extends Controller
         $post->author()->associate(Auth::user());
         $post->save();
 
+        //TODO add $post->postable() relation adding (and validation)
+
         if ($request->file('image')){
             $image = Image::createFromUploaded($request->file('image'));
             $image->is_avatar = false;

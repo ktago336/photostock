@@ -25,6 +25,17 @@ class Post extends Model
     }
 
 
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class, 'post_id');
+    }
+
+
+    public function postable(): MorphTo{
+        return $this->morphTo();
+    }
+
+
     public function createdAgo(){
         Carbon::setLocale('ru');
         return $this->created_at->diffForHumans();

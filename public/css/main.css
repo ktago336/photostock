@@ -226,6 +226,7 @@ body {
 }
 
 .likes {
+    cursor: pointer;
     font-weight: bold;
     color: #0077B5;
 }
@@ -391,4 +392,8 @@ body {
 .file-input__label svg {
     height: 16px;
     margin-right: 4px;
+}
+
+.red{
+    color: red;
 }

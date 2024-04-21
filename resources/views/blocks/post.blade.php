@@ -9,7 +9,10 @@
         </div>
         <div class="post-info d-flex justify-content-between align-items-end">
             <span class="publish-date">{{$post->createdAgo()}}</span>
-            <span class="likes">15 &#10084;</span>
+            <span class="likes like-btn d-flex" data-post-id="{{$post->id}}">
+                <div class="numberOfLikes">{{$post->likes()->count()}} </div>
+                <div class="like-symbol @if(in_array($post->id, $userLikedPostsIds)) red @endif">&#10084;</div>
+            </span>
         </div>
     </div>
 </div>
