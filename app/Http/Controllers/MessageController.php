@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\MessageSent;
+use App\Models\Image;
 use App\Models\Like;
 use App\Models\Message;
 use App\Models\User;
@@ -28,11 +29,25 @@ class MessageController extends Controller
     public function sendMessage(Request $request){
         $input = $request->input();
 
+        //dd($request->file());
+
+
         $message = new Message();
         $message->from_id = Auth::id();
         $message->to_id=$input['to_id'];
         $message->text = $input['text'];
         $message->save();
+
+        if ($request->file()){
+            foreach (array_slice($request->file(),0,10) as $image){
+                $image = Image::createFromUploaded($image);
+                $image->is_avatar = false;
+                $image->author_id = Auth::id();
+                $message->images()->save($image);
+                $image->save();
+            }
+        }
+
         MessageSent::dispatch($message);
 
         return response()->json(['success'=>true]);

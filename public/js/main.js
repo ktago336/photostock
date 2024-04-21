@@ -109,13 +109,25 @@ function sendMessage(){
     if (!text || text===''){
         return;
     }
+    var data = new FormData();
+    data.append('to_id',to_id??0);
+    data.append('text',text);
+
+    let index=1;
+    var images = $('#attach_images').prop('files');
+    if (images != null) {
+        Array.prototype.forEach.call(images, function (file) {
+            data.append('image-' + (index++).toString(), file);
+        });
+        data.append('numberOfImages', index.toString());
+    }
+
     $.ajax({
         url: '/send-message',
         type: 'post',
-        data: {
-            to_id: to_id??0,
-            text: text
-        },
+        data: data,
+        contentType: false,
+        processData: false,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         },

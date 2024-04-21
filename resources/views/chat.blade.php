@@ -15,6 +15,21 @@
 
                     <div class="form-group w-50 d-flex" style="margin-bottom: 50px">
                         <textarea required name="text" class="form-control" id="textToSend" rows="3"></textarea>
+                        <div class="d-flex flex-row-reverse mt-3">
+                            <div class="form-group">
+                                <div class="file-input">
+                                    <input id="attach_images"
+                                        type="file"
+                                        name="image"
+                                        class="file-input__input"
+                                        multiple
+                                    />
+                                    <label class="file-input__label" for="attach_images">
+                                        @include('app.svg.clip'  )
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <button id="sendMessage" type="button" class="firm-btn form-control btn">Отправить</button>
                     </div>
 
@@ -29,8 +44,8 @@
         const TheirProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()}}';
         const TheirName = '{{$chatWith->name}}';
         const TheirImage = '{{$chatWith->avatar()}}';
-
-
+    </script>
+    <script>
         document.addEventListener('DOMContentLoaded',function (){
             window.Echo.private(`messages.{{\Illuminate\Support\Facades\Auth::id()}}`) //
                 .listen('MessageSent', (e) => {

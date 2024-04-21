@@ -1,6 +1,6 @@
 <div class="header sticky ">
     <h1 class="flex-container">
-        <img height="50px" src="/svg/logo-wide.svg">
+        <img height="50px" src="/svg/1logo-wide.svg">
         @guest()
             @if(($page??'') == 'login')
                 <a href="{{route('register')}}" class="header-link" style="padding-right: 1%" >Регистрация</a>
