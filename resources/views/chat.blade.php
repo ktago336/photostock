@@ -13,8 +13,8 @@
                 </div>
 
 
-                    <div class="form-group w-50 d-flex" style="margin-bottom: 50px">
-                        <textarea required name="text" class="form-control" id="textToSend" rows="3"></textarea>
+                    <div class="form-group w-100 d-flex" style="margin-bottom: 50px; bottom: 50px; position:sticky; background-color:#e1dada">
+                        <textarea required name="text" class="form-control" id="textToSend" rows="3" placeholder="Напишите сообщение" style="height:7ch;"></textarea>
                         <div class="d-flex flex-row-reverse mt-3">
                             <div class="form-group">
                                 <div class="file-input">
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button id="sendMessage" type="button" class="firm-btn form-control btn">Отправить</button>
+                        <button id="sendMessage" type="button" class="firm-btn form-control btn" style="width:15%">Отправить</button>
                     </div>
 
                 <!-- Add more posts, friends, etc. -->
