@@ -12,7 +12,7 @@
         </div>
         <div class="container-main" style="margin-top: 0px">
             <div class="profile-header">
-                <img class="profile-picture" src="{{$profile->avatar()??config('app.profile_placeholder')}}" alt="Profile Picture">
+                <img class="profile-picture" src="{{$profile->avatar()->image??config('app.profile_placeholder')}}" alt="Profile Picture">
 
             </div>
             <div class="profile-content">

@@ -10,6 +10,7 @@ class FeedController extends Controller
 {
     public function index(){
         $userLikedPostsIds = Like::select('post_id')->where('user_id',Auth::id())->pluck('post_id')->toArray();
-        return view('feed',compact('userLikedPostsIds'));
+        $posts = \App\Models\Post::latest()->with(['author', 'author.images'])->get();
+        return view('feed',compact('userLikedPostsIds','posts'));
     }
 }

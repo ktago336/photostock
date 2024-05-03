@@ -6,7 +6,7 @@
 @section('content')
     <div class="content">
 
-        @foreach(\App\Models\Post::latest()->with(['author', 'author.images'])->get() as $feedPost)
+        @foreach($posts as $feedPost)
             @include('blocks.post', ['post'=>$feedPost, 'profile'=>$feedPost->author])
         @endforeach
 

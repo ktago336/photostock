@@ -38,7 +38,7 @@ class RegisterController extends Controller
         $user->name = $input['name'];
         $user->surname = $input['surname'];
         $user->email = $input['email'];
-        $user->password = Hash::make($input['password']);
+        $user->password = $input['password'];
 
         $user->save();
 

@@ -1,7 +1,14 @@
 <div class="post">
-    <img class="author-image" src="{{$profile->avatar()}}" alt="Author Image">
+    <a href="{{route('user.page',$profile->id)}}" target="_blank">
+        <img class="author-image" src="{{$profile->avatar()->image}}" alt="Author Image">
+    </a>
     <div class="post-content">
-        <p><b>{{$profile->name??''}}: </b>{{$post->text??''}}</p>
+            <p>
+                <a style="text-decoration: none; color: black" href="{{route('user.page',$profile->id)}}" target="_blank">
+                    <b>{{$profile->name??''}}: </b>
+                </a>
+                {{$post->text??''}}
+            </p>
         <div class="width-1">
             @foreach($post->images as $image)
                 <img width="400px" src="{{$image->image}}">

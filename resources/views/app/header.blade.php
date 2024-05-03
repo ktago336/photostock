@@ -11,7 +11,7 @@
             @endif
         @endguest
         @auth()
-            <a href="{{route('my.page')}}" class="header-link my-page-link"><img class="header-avatar" src="{{\Illuminate\Support\Facades\Auth::user()->avatar()}}"> Моя страница</a>
+            <a href="{{route('my.page')}}" class="header-link my-page-link"><img class="header-avatar" src="{{\Illuminate\Support\Facades\Auth::user()->avatar()->image}}"> Моя страница</a>
         @endauth
     </h1>
 </div>

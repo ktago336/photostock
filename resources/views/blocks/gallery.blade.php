@@ -1,14 +1,3 @@
-<div class="container"> 
-  @foreach(/*$images->chunk(3)??*/[] as $chunk)
-  <div class="row">
-    @foreach($chunk as $image)
-    <div class="col">
-       <img src="{{$image->image??''}}">
-    </div>
-    @endforeach
-  </div>
-  @endforeach
-</div>
 <!-- Page Content -->
 <div class="container">
   <div class="row text-center text-lg-start">
@@ -20,5 +9,4 @@
     </div>
     @endforeach
   </div>
-
 </div>

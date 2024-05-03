@@ -25,5 +25,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/messages',[\App\Http\Controllers\MessageController::class, 'messages'])->name('messages');
     Route::get('/chat/{to_id}',[\App\Http\Controllers\MessageController::class, 'chat'])->name('chat');
     Route::post('/send-message', [\App\Http\Controllers\MessageController::class, 'sendMessage'])->name('message.send');
+    Route::get('/user/{id}',[\App\Http\Controllers\ProfileController::class, 'userPage'])->name('user.page');
+    Route::post('/update/photo/profile/{id}',[\App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('update.avatar');
 });
 

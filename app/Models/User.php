@@ -53,7 +53,16 @@ class User extends Authenticatable
         //TODO add Images model realisation, Images with is_avatar are array, last is actual
          return $this->images()->where('is_avatar',1)->latest('id')->first()
              ??
-             config('app.profile_placeholder');
+             (object)['image'=>config('app.profile_placeholder')];
+    }
+
+
+    public function allImages(){
+        return Image::where(function($q){
+            $q->where('imageable_type','App\Models\Post')
+              ->orWhere('imageable_type','App\Models\User');
+        })
+            ->where('author_id',$this->id);
     }
 
 
