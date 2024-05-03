@@ -62,7 +62,8 @@ class User extends Authenticatable
             $q->where('imageable_type','App\Models\Post')
               ->orWhere('imageable_type','App\Models\User');
         })
-            ->where('author_id',$this->id);
+            ->where('author_id',$this->id)
+	    ->orderBy('id','desc');
     }
 
 
