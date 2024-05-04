@@ -37,7 +37,6 @@ class Post extends Model
 
 
     public function createdAgo(){
-        Carbon::setLocale('ru');
         return $this->created_at->diffForHumans();
     }
 
