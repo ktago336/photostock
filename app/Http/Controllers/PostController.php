@@ -20,6 +20,7 @@ class PostController extends Controller
         $post->text = $input['text'];
         $post->save();
         $post->author()->associate(Auth::user());
+        $post->postable()->associate(Auth::user());
         $post->save();
 
         //TODO add $post->postable() relation adding (and validation)

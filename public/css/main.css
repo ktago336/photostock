@@ -438,3 +438,26 @@ body {
 .red{
     color: red;
 }
+
+
+.subscribe-button {
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(84, 105, 212);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    display: inline-block;
+    min-height: 28px;
+    transition: background-color .24s, box-shadow .24s;
+    height: 5ch;
+    width: 100%;
+}
+
+.subscribe-button :hover {
+    background-color: rgb(185, 192, 224);
+}
+

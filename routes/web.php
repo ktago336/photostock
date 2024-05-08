@@ -27,5 +27,16 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/send-message', [\App\Http\Controllers\MessageController::class, 'sendMessage'])->name('message.send');
     Route::get('/user/{id}',[\App\Http\Controllers\ProfileController::class, 'userPage'])->name('user.page');
     Route::post('/update/photo/profile/{id}',[\App\Http\Controllers\ProfileController::class, 'updateAvatar'])->name('update.avatar');
+
+    Route::get('/subscribe-profile/{id}',[\App\Http\Controllers\SubscriptionController::class, 'subscribeToProfile'])->name('subscribe.profile');
+    Route::get('/delete-friend/{id}',[\App\Http\Controllers\FriendsController::class, 'deleteFriend'])->name('delete.friend');
+    Route::get('/unsubscribe/user/{id}',[\App\Http\Controllers\SubscriptionController::class, 'deleteProfileSubscription'])->name('delete.subscription');
+
+
+    Route::get('/developer-blog',function (){
+        return view('developers-blog');
+    });
+
+
 });
 

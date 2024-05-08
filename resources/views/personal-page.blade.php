@@ -18,6 +18,14 @@
                     <input id="profileImage" data-user-id="{{$profile->id}}" type="file" accept="image/png, image/jpeg" hidden>
                 @else
                     <img class="profile-picture" src="{{$profile->avatar()->image??config('app.profile_placeholder')}}" alt="Profile Picture">
+                    @if( \Illuminate\Support\Facades\Auth::user()->isFriend($profile->id))
+                        <button class="subscribe-button" style="background-color:#d3d3d3; color: #013684" onclick=" if (confirm('Вы хотите удалить друга?')) location.href='{{route('delete.friend',['id'=>$profile->id])}}'">Вы друзья</button>
+                    @elseif(\Illuminate\Support\Facades\Auth::user()->isSubscribed($profile->id))
+                         <button class="subscribe-button" style="background-color:#d3d3d3; color: #013684;" onclick=" if (confirm('Вы хотите отписаться?')) location.href='{{route('delete.subscription',['id'=>$profile->id])}}'">Вы подписаны</button>
+
+                    @else
+                        <button class="subscribe-button" onclick="location.href='{{route('subscribe.profile',['id'=>$profile->id])}}'">Подписаться</button>
+                    @endif
                 @endif
             </div>
             <div class="profile-content">

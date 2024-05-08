@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('subscribeables', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->longText('text');
-            $table->boolean('is_read')->default(0);
-            $table->foreignId('to_id');
-            $table->foreignId('from_id');
+            $table->foreignId('subscribeable_id');
+            $table->string('subscribeable_type');
+            $table->foreignId('user_id');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-            Schema::dropIfExists('messages');
+        Schema::dropIfExists('subscribeables');
     }
 };
