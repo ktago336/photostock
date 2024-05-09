@@ -4,9 +4,9 @@
 
 @section('content')
 
-    <div class="content">
+    <div class="content w-100">
 
-                <div id="chat">
+                <div id="chat w-100">
                     @foreach($messages as $message)
                         @include('blocks.message',compact('message'))
                     @endforeach
