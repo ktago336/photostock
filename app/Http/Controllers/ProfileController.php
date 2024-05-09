@@ -17,10 +17,11 @@ class ProfileController extends Controller
 
 
     public function userPage($id){
-        $profile = User::findOrFail($id);
+        $profile = User::with('images')->findOrFail($id);
         $userLikedPostsIds = Like::select('post_id')->where('user_id',Auth::id())->pluck('post_id')->toArray();
-
-        return view('personal-page',compact('profile','userLikedPostsIds'));
+        $friendsTotal = $profile->friendsCount();
+        $friends = $profile->friends()->latest()->take(9)->get();
+        return view('personal-page',compact('profile','userLikedPostsIds', 'friendsTotal','friends'));
     }
 
 

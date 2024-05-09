@@ -10,7 +10,7 @@
             {{$profile->name??''}} {{$profile->surname??''}}
         </div>
         <div class="container-main" style="margin-top: 0px">
-            <div class="profile-header">
+            <div class="profile-header" style="width: 40%">
                 @if(\Illuminate\Support\Facades\Auth::id() == $profile->id)
                     <label for="profileImage" style="cursor:pointer;">
                         <img class="profile-picture" src="{{$profile->avatar()->image??config('app.profile_placeholder')}}" alt="Profile Picture">
@@ -27,6 +27,11 @@
                         <button class="subscribe-button" onclick="location.href='{{route('subscribe.profile',['id'=>$profile->id])}}'">Подписаться</button>
                     @endif
                 @endif
+                    <div class="d-flex justify-content-between align-items-end border-bottom border-top border-5 border-dark category-header" style="margin-top: 2ch">
+                        <h4 class="px-3 category-header-title">Друзья {{$friendsTotal}}</h4>
+                    </div>
+                    @include('blocks.friends', compact('friends'))
+
             </div>
             <div class="profile-content">
                 <div class="d-flex justify-content-between align-items-end border-bottom border-5">

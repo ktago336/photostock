@@ -461,3 +461,15 @@ body {
     background-color: rgb(185, 192, 224);
 }
 
+.square {
+    align-items: center;
+    justify-content: center;
+    height: 100px; /* Fixed height */
+    width: 100px; /* Fixed width */
+    margin-bottom: 10px; /* Optional margin between items */
+}
+.thumbnail-image{
+    object-fit: cover;
+    height: 10ch;
+    width: 10ch;
+}

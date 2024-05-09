@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Http\Controllers\SubscriptionController;
 use App\Interfaces\Postable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,6 +41,9 @@ class User extends Authenticatable implements Postable
         'remember_token',
     ];
 
+
+    private $avatar;
+
     /**
      * Get the attributes that should be cast.
      *
@@ -54,10 +59,13 @@ class User extends Authenticatable implements Postable
 
 
     public function avatar(){
+        if (!$this->avatar){
+            return $this->avatar = $this->images()->where('is_avatar',1)->latest('id')->first()
+                ??
+                (object)['image'=>config('app.profile_placeholder')];
+        }
         //TODO add Images model realisation, Images with is_avatar are array, last is actual
-         return $this->images()->where('is_avatar',1)->latest('id')->first()
-             ??
-             (object)['image'=>config('app.profile_placeholder')];
+        return $this->avatar;
     }
 
 
@@ -151,7 +159,7 @@ class User extends Authenticatable implements Postable
             ->orWhere(function ($q) use ($id, $thisUserId){
                 $q->where('user_id',$thisUserId)
                     ->where('friend_id',$id);
-            });
+            })->first();
         if ($friendship){
             $friendship->delete();
         }
@@ -181,6 +189,11 @@ class User extends Authenticatable implements Postable
     public function hasSubscriber($subscriberId){
         return (bool)Subscription::where('user_id',$subscriberId)->where('subscribeable_type',User::class)->where('subscribeable_id',$this->id)->first();
     }
+
+
+    public function friendsCount(){
+        return Friendship::select('id')->where('user_id',$this->id)->orWhere('friend_id',$this->id)->count();
+    }
     
 
 
@@ -206,11 +219,27 @@ class User extends Authenticatable implements Postable
     }
 
 
+    public function friends()
+    {
+        // Query for friends where the user is in the user_id column
+        $friendsAsUser = User::whereIn(
+            'id',
+            Friendship::where('user_id', $this->id)
+                ->select('friend_id')
+        );
 
-    public function friends(){
-        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
+        // Query for friends where the user is in the friend_id column
+        $friendsAsFriend = User::whereIn(
+            'id',
+            Friendship::where('friend_id', $this->id)
+                ->select('user_id')
+        );
+
+        // Combine the two queries using unionAll, then get results
+        $friends = $friendsAsUser->unionAll($friendsAsFriend);
+
+        return $friends;
     }
-
 
     protected function mergeFriends(){
         return $this->friendsOfMine->merge($this->friendOf);
@@ -252,8 +281,4 @@ class User extends Authenticatable implements Postable
         }
     }
 
-
-    protected function friendships(){
-        return $this->hasMany(Friendship::class);
-    }
 }

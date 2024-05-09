@@ -13,7 +13,8 @@ class Subscription extends Model
     protected $table='subscribeables';
 
 
-    protected $fillable=['user_id','friend_id'];
+
+    protected $fillable=['subscribeable_id','subscribeable_type','user_id'];
 
 
     public function user()
@@ -21,8 +22,8 @@ class Subscription extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function friend()
+    public function subscribeable()
     {
-        return $this->belongsTo(User::class, 'friend_id');
+        return $this->belongsTo(User::class, 'subscribeable_id');
     }
 }
