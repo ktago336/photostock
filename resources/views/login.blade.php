@@ -13,7 +13,7 @@
                 @csrf
                 <input required type="text" name="email" title="email" placeholder="E-mail">
                 <input required type="password" name="password" title="username" placeholder="Пароль">
-                <button type="submit" class="btn">Вход1</button>
+                <button type="submit" class="btn">Вход</button>
             </form>
             @if($errors->any())
                 {!! implode('', $errors->all('<div>:message</div>')) !!}
