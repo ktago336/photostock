@@ -26,6 +26,7 @@
                     @else
                         <button class="subscribe-button" onclick="location.href='{{route('subscribe.profile',['id'=>$profile->id])}}'">Подписаться</button>
                     @endif
+                    <button style="margin-top: 2ch" class="subscribe-button" onclick="location.href='{{route('subscribe.profile',['id'=>$profile->id])}}'">Написать сообщение</button>
                 @endif
                     <div class="d-flex justify-content-between align-items-end border-bottom border-top border-5 border-dark category-header" style="margin-top: 2ch">
                         <h4 class="px-3 category-header-title">Друзья {{$friendsTotal}}</h4>

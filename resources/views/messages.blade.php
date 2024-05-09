@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="content">
+    <div class="content w-100">
 
 
                 @foreach(\App\Models\User::all() as $chat)
