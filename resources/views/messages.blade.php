@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <div class="content w-100">
+    <div class="content" style="width: 80%;">
 
 
-                @foreach(\App\Models\User::all() as $chat)
+                @foreach($chats as $chat)
                     @include('blocks.chat',compact('chat'))
                 @endforeach
 

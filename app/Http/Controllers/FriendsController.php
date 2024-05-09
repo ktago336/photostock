@@ -15,9 +15,6 @@ class FriendsController extends Controller
     }
 
 
-
-
-
     public function deleteFriend($id){
         $user = Auth::user();
         if ($id == $user->id || !User::find($id)){
@@ -28,5 +25,11 @@ class FriendsController extends Controller
         $user->deleteFriend($id);
 
         return redirect()->back();
+    }
+
+
+    public function people(){
+        $users = User::all()->except([Auth::id()]);
+        return view('people',compact('users'));
     }
 }

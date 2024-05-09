@@ -99,6 +99,18 @@ class User extends Authenticatable implements Postable
     }
 
 
+    /**
+     * @return mixed Users builder, the example of model  have chat with
+     */
+    public function chats(){
+        $chattersIds = $this->recievedMessages()->groupBy('from_id')->select('from_id as to_id')->union(
+            $this->sentMessages()->groupBy('to_id')->select('to_id')
+        )->get()->pluck('to_id')->toArray();
+
+        return User::whereIn('id',$chattersIds);
+    }
+
+
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class, 'user_id');
@@ -117,8 +129,8 @@ class User extends Authenticatable implements Postable
    }
 
 
-    public function subscriptions():MorphToMany{
-        return $this->morphToMany(User::class, 'subscribeable', 'subscribeables', 'user_id', 'subscribeable_id');
+    public function subscriptions():HasMany{
+        return $this->hasMany(Subscription::class);
     }
 
 

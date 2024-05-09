@@ -14,7 +14,8 @@ class MessageController extends Controller
 {
     public function messages(){
         $profile = Auth::user();
-        return view('messages',compact('profile'));
+        $chats = $profile->chats()->get();
+        return view('messages',compact('profile','chats'));
     }
 
 
