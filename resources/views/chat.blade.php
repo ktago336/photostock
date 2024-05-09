@@ -40,10 +40,10 @@
     </div>
     <script>
         const to_id = {{$to_id}};
-        const ProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->image}}';
-        const TheirProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->image}}';
+        const ProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->url}}';
+        const TheirProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->url}}';
         const TheirName = '{{$chatWith->name}}';
-        const TheirImage = '{{$chatWith->avatar()->image}}';
+        const TheirImage = '{{$chatWith->avatar()->url}}';
     </script>
     <script>
         document.addEventListener('DOMContentLoaded',function (){

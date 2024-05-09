@@ -1,6 +1,6 @@
 <div class="post">
     <a href="{{route('user.page',$profile->id)}}" target="_blank">
-        <img class="author-image" src="{{$profile->avatar()->image}}" alt="Author Image">
+        <img class="author-image" src="{{$profile->avatar()->url}}" alt="Author Image">
     </a>
     <div class="post-content">
             <p>

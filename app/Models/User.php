@@ -62,7 +62,7 @@ class User extends Authenticatable implements Postable
         if (!$this->avatar){
             return $this->avatar = $this->images()->where('is_avatar',1)->latest('id')->first()
                 ??
-                (object)['image'=>config('app.profile_placeholder')];
+                (object)['url'=>config('app.profile_placeholder')];
         }
         //TODO add Images model realisation, Images with is_avatar are array, last is actual
         return $this->avatar;

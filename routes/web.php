@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function(){
         return view('developers-blog');
     });
 
+    Route::get('/image/{id}',[\App\Http\Controllers\ImageController::class,'getImage'])->name('get.image');
+
 
 });
 

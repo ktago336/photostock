@@ -13,11 +13,11 @@
             <div class="profile-header" style="width: 40%">
                 @if(\Illuminate\Support\Facades\Auth::id() == $profile->id)
                     <label for="profileImage" style="cursor:pointer;">
-                        <img class="profile-picture" src="{{$profile->avatar()->image??config('app.profile_placeholder')}}" alt="Profile Picture">
+                        <img class="profile-picture" src="{{$profile->avatar()->url??config('app.profile_placeholder')}}" alt="Profile Picture">
                     </label>
                     <input id="profileImage" data-user-id="{{$profile->id}}" type="file" accept="image/png, image/jpeg" hidden>
                 @else
-                    <img class="profile-picture" src="{{$profile->avatar()->image??config('app.profile_placeholder')}}" alt="Profile Picture">
+                    <img class="profile-picture" src="{{$profile->avatar()->url??config('app.profile_placeholder')}}" alt="Profile Picture">
                     @if( \Illuminate\Support\Facades\Auth::user()->isFriend($profile->id))
                         <button class="subscribe-button" style="background-color:#d3d3d3; color: #013684" onclick=" if (confirm('Вы хотите удалить друга?')) location.href='{{route('delete.friend',['id'=>$profile->id])}}'">Вы друзья</button>
                     @elseif(\Illuminate\Support\Facades\Auth::user()->isSubscribed($profile->id))

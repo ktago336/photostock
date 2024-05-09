@@ -21,11 +21,19 @@ class Image extends Model
         if (!$file) {
             return '';
         }
-        $path = '/uploads/' . Storage::disk('public_uploads')->put('images', $file);
+        $name = Storage::disk('private')->put('',$file);
         $image = new self();
-        $image->image = $path;
+        $image->image = $name;
         return $image;
     }
+
+
+    public function getUrlAttribute(){
+        //TODO image size parameters
+        return route('get.image',$this->id);
+    }
+
+
 
     //It can be assigned to commentary, post, profile (user)
     public function imageable():MorphTo{

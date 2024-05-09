@@ -1,6 +1,6 @@
 <div class="post">
     <a href="{{route('user.page',$profile->id)}}" target="_blank">
-        <img class="author-image" src="{{$profile->avatar()->image}}" alt="Author Image">
+        <img class="author-image" src="{{$profile->avatar()->url}}" alt="Author Image">
     </a>
     <div class="post-content">
             <p>
@@ -11,7 +11,7 @@
             </p>
         <div class="width-1">
             @foreach($post->images as $image)
-                <img width="400px" src="{{$image->image}}">
+                <img width="400px" src="{{$image->url}}">
             @endforeach
         </div>
         <div class="post-info d-flex justify-content-between align-items-end">
