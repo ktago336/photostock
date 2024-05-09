@@ -134,11 +134,11 @@ class User extends Authenticatable implements Postable
     }
 
 
-    public function getFriendsAttribute(){
-        if ( ! array_key_exists('friends', $this->relations)) $this->loadFriends();
-
-        return $this->getRelation('friends');
-    }
+//    public function getFriendsAttribute(){
+//        if ( ! array_key_exists('friends', $this->relations)) $this->loadFriends();
+//
+//        return $this->getRelation('friends');
+//    }
 
 
     public function makeFriendsWith(int $id){
@@ -233,34 +233,34 @@ class User extends Authenticatable implements Postable
 
     public function friends()
     {
-        // Query for friends where the user is in the user_id column
-        $friendsAsUser = User::whereIn(
-            'id',
-            Friendship::where('user_id', $this->id)
-                ->select('friend_id')
-        );
+        // Query for friends where the current user is user_id and the friend is friend_id
+        $friendsAsUserId = $this->belongsToMany(
+            User::class,
+            'friends',
+            'user_id',
+            'friend_id'
+        )
+            ->select('users.*'); // Select the same set of columns as the other query
 
-        // Query for friends where the user is in the friend_id column
-        $friendsAsFriend = User::whereIn(
-            'id',
-            Friendship::where('friend_id', $this->id)
-                ->select('user_id')
-        );
+        // Query for friends where the current user is friend_id and the user is user_id
+        $friendsAsFriendId = $this->belongsToMany(
+            User::class,
+            'friends',
+            'friend_id',
+            'user_id'
+        )
+            ->select('users.*')->addSelect('friends.user_id as pivot_user_id')->addSelect('friends.friend_id as pivot_friend_id'); // Select the same set of columns as the other query
 
-        // Combine the two queries using unionAll, then get results
-        $friends = $friendsAsUser->unionAll($friendsAsFriend);
 
-        return $friends;
+        $combinedQuery = $friendsAsUserId->union($friendsAsFriendId);
+
+        return $combinedQuery;
     }
 
     protected function mergeFriends(){
         return $this->friendsOfMine->merge($this->friendOf);
     }
 
-
-    public function getFriends(){
-
-    }
 
 
     public function authored(): HasMany
