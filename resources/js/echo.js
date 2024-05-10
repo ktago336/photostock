@@ -13,4 +13,4 @@ window.Echo = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
-
+console.log('echo started')
