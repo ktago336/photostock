@@ -4,7 +4,7 @@
     @foreach($friends as $friend)
       <li class="col-md-4 square">
         <a style="text-decoration: none; color: inherit" href="{{route('user.page',$friend)}}" target="_blank">
-          <img class="thumbnail-image" src="{{$friend->avatar()->url}}"> <p>{{$friend->name}}</p>
+          <img class="thumbnail-image" src="{{$friend->avatar()->url}}"> <p>{{$friend->name}} {{$friend->surname}}</p>
         </a>
       </li>
     @endforeach
