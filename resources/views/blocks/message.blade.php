@@ -11,7 +11,7 @@
     </div>
 @else
     <div class="their-message-message d-flex justify-content-end">
-        <img class="author-image" src="{{$message->to->avatar()->url}}" alt="Author Image">
+        <img class="author-image" src="{{$message->from->avatar()->url}}" alt="Author Image">
         <div class="post-content ">
             <p class="text-break"><b>{{$message->from->name??''}}: </b>{{$message->text??''}}</p>
             @include('blocks.gallery',['images'=>$message->images])
