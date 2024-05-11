@@ -9,7 +9,7 @@
             </a>
         </p>
         <div class="width-1">
-            bio
+            {{$community->bio??''}}
         </div>
     </div>
 </div>
