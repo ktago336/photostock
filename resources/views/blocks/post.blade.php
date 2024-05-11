@@ -1,11 +1,21 @@
+@php
+    $link = '';
+    if($post->postable::class == \App\Models\User::class){
+        $link = route('user.page',$post->postable->id);
+    }
+    elseif ($post->postable::class == \App\Models\Community::class){
+        $link = route('community.page',$post->postable->id);
+    }
+
+@endphp
 <div class="post">
-    <a href="{{route('user.page',$profile->id)}}" target="_blank">
-        <img class="author-image" src="{{$profile->avatar()->url}}" alt="Author Image">
+    <a href="{{$link}}" target="_blank">
+        <img class="author-image" src="{{$post->postable->avatar()->url}}" alt="Author Image">
     </a>
     <div class="post-content">
             <p>
-                <a style="text-decoration: none; color: black" href="{{route('user.page',$profile->id)}}" target="_blank">
-                    <b>{{$profile->name??''}}: </b>
+                <a style="text-decoration: none; color: black" href="{{$link}}" target="_blank">
+                    <b>{{$post->postable->name??''}}: </b>
                 </a>
                 {{$post->text??''}}
             </p>

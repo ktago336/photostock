@@ -78,7 +78,7 @@ class User extends Authenticatable implements Postable
 	    ->orderBy('id','desc');
     }
 
-
+//TODO rewrite communities and user in traits
     public function images():MorphMany{
         return $this->morphMany(Image::class,'imageable');
     }
@@ -221,13 +221,12 @@ class User extends Authenticatable implements Postable
             })->first();
     }
     
-    public function isSubscribed($id){
+    public function isSubscribed($subscribeable){
         $thisUserId=$this->id;
-        return Subscription::where(function ($q) use ($id, $thisUserId){
-            $q->where('user_id',$thisUserId)
-                ->where('subscribeable_id',$id);
-            })
-        ->first() ?? false;
+        return Subscription::where('user_id',$thisUserId)
+                ->where('subscribeable_id',$subscribeable->id)
+                ->where('subscribeable_type',$subscribeable::class)
+                ->first() ?? false;
     }
 
 

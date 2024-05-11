@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded',function (){
     })
 
 
+    $("#communityImage").on('change', function (){
+        updateCommunityImage($(this).data('userId'));
+    })
+
+
     //Выпадающая подробная информация в профиле
     $("#show-additional").on('click',function (){
         if(!$("#additional-info").is(":visible")){
@@ -156,6 +161,34 @@ function updateProfileImage(id){
 
         $.ajax({
             url: '/update/photo/profile/'+id,
+            type: 'post',
+            data: data,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (data) {
+                console.log(data)
+            }
+
+        });
+    }
+}
+
+
+function updateCommunityImage(id){
+    if ($('#communityImage')[0].files.length>0){
+        let file = $('#profileImage')[0].files[0];
+        let data = new FormData();
+
+        data.append('image', file);
+
+        $.ajax({
+            url: '/update/photo/community/'+id,
             type: 'post',
             data: data,
             contentType: false,
