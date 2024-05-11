@@ -25,9 +25,14 @@ class Post extends Model
     }
 
 
-    public function likes(): HasMany
+    public function likes(): MorphMany
     {
-        return $this->hasMany(Like::class, 'post_id');
+        return $this->morphMany(Like::class,'likeable');
+    }
+
+
+    public function comments():MorphMany{
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
 

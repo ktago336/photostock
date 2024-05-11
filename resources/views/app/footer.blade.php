@@ -5,3 +5,10 @@
         <a class="footer-link" href="#">Contact Us</a>
     </div>
 </nav>
+
+
+<!-- Modal -->
+
+@include('modals.comments')
+
+<!-- Modal -->

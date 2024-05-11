@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/new-community/create',[\App\Http\Controllers\CommunityController::class, 'communityCreate'])->name('community.create');
     Route::post('/new-community/create',[\App\Http\Controllers\CommunityController::class, 'communityCreatePost'])->name('community.create.post');
 
+    Route::get('/get/comments',[\App\Http\Controllers\CommentController::class, 'getComments'])->name('get.comments');
+    Route::post('/send/comment',[\App\Http\Controllers\CommentController::class, 'sendComment'])->name('send.comment');
+
     
     Route::get('/developer-blog',function (){
         return view('developers-blog');

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function createPost(Request $request){
-
         $input = $request->validate([
             'text'=>'required',
             'image'=>'file'
@@ -26,12 +25,14 @@ class PostController extends Controller
 
         //TODO add $post->postable() relation adding (and validation)
 
-        if ($request->file('image')){
-            $image = Image::createFromUploaded($request->file('image'));
-            $image->is_avatar = false;
-            $image->author_id = Auth::id();
-            $post->images()->save($image);
-            $image->save();
+        if ($request->file('images')){
+            foreach ($request->file('images') as $imageFile){
+                $image = Image::createFromUploaded($imageFile);
+                $image->is_avatar = false;
+                $image->author_id = Auth::id();
+                $post->images()->save($image);
+                $image->save();
+            }
         }
 
 

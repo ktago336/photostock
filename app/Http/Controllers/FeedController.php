@@ -12,7 +12,7 @@ class FeedController extends Controller
 {
     public function index(){
         //TODO better cache liked posts
-        $userLikedPostsIds = Like::select('post_id')->where('user_id',Auth::id())->pluck('post_id')->toArray();
+        $userLikedPostsIds = Like::select('likeable_type','likeable_id','id')->where('user_id',Auth::id())->groupBy('likeable_type','likeable_id','id')->get();
         //$posts = \App\Models\Post::latest()->with(['author', 'author.images'])->get();
         $posts=Post::query();
         $subscriptions = Auth::user()->subscriptions()->get();

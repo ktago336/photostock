@@ -83,8 +83,9 @@
                                     <div class="form-group">
                                         <div class="file-input">
                                             <input
+                                                    multiple
                                                     type="file"
-                                                    name="image"
+                                                    name="images[]"
                                                     id="file-input"
                                                     class="file-input__input"
                                             />
@@ -102,7 +103,7 @@
                 @endif
 
 
-                @foreach($profile->posts()->latest()->get() as $post)
+                @foreach($profile->wall()->latest()->get() as $post)
                     @include('blocks.post',compact('post'))
                 @endforeach
 
