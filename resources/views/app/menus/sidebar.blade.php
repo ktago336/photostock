@@ -3,6 +3,7 @@
     <a href="{{route('my.page')}}">Мой профиль</a>
     <a href="{{route('messages')}}">Мои сообщения</a>
     <a href="{{route('people')}}">Люди</a>
+    <a href="{{route('communities')}}">Сообщества</a>
     <br>
     <br>
     <a href="{{route('login.exit')}}">Выход</a>

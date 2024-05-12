@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded',function (){
     })
 
 
+    $("#communityImage").on('change', function (){
+        updateCommunityImage($(this).data('userId'));
+    })
+
+
     //Выпадающая подробная информация в профиле
     $("#show-additional").on('click',function (){
         if(!$("#additional-info").is(":visible")){
@@ -39,13 +44,14 @@ document.addEventListener('DOMContentLoaded',function (){
     //Процедура отправки лайка
     $(".like-btn").on('click',function(){
         let likeBtn = $(this);
-        let post_id = $(this).data('postId');
-        console.log(post_id);
+        let likeable_id = $(this).data('likeableId');
+        let likeable_type = $(this).data('likeableType');
         $.ajax({
             url: '/like',
             type: 'post',
             data: {
-                post_id: post_id
+                likeable_id: likeable_id,
+                likeable_type:likeable_type
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -62,7 +68,6 @@ document.addEventListener('DOMContentLoaded',function (){
                     likeBtn.find('.like-symbol').removeClass('red');
 
                 }
-
             },
             error: function (data) {
                 console.log(data)
@@ -71,6 +76,91 @@ document.addEventListener('DOMContentLoaded',function (){
         });
     });
 
+
+    //Открытие комментариев
+    $(".comment-btn").on('click',function (){
+        var commentable_type = $(this).data('commentableType');
+        var commentable_id = $(this).data('commentableId');
+console.log(commentable_type);
+        var form = $('#post-comment');
+        form.data('commentableType',commentable_type);
+        form.data('commentableId',commentable_id);
+console.log(form.data('commentableType'));
+
+        $.ajax({
+            url: '/get/comments',
+            type: 'get',
+            data: {
+                commentable_type: commentable_type,
+                commentable_id:commentable_id
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (data) {
+                $("#comments-array").html(data.cards);
+            },
+            error: function (data) {
+                console.log(data)
+            }
+
+        });
+
+        //TODO через $(this).closest('.post') сделать заполнение модалки инфой поста
+    });
+
+
+    //Отправка комментария
+    $('#post-comment').on('submit',function (e){
+        e.preventDefault();
+        var data = new FormData($(this)[0]);
+        data.append('commentable_type',$(this).data('commentableType')??null);
+        data.append('commentable_id',$(this).data('commentableId')??null);
+
+        let index=1;
+        var images = $('#file-input-comment').prop('files');
+        if (images != null) {
+            Array.prototype.forEach.call(images, function (file) {
+                data.append('image-' + (index++).toString(), file);
+            });
+            data.append('numberOfImages', index.toString());
+        }
+
+        $.ajax({
+            url: '/send/comment',
+            type: 'post',
+            data: data,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (data) {
+                $.ajax({
+                    url: '/get/comments',
+                    type: 'get',
+                    data: {
+                        commentable_type: data.commentable_type,
+                        commentable_id:data.commentable_id
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function (data) {
+                        $("#comments-array").html(data.cards);
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    }
+
+                });
+            },
+            error: function (data) {
+                console.log(data)
+            }
+
+        });
+    })
 
     //Обработка отрпавки сообщения
     $("#sendMessage").on('click',function (){
@@ -156,6 +246,34 @@ function updateProfileImage(id){
 
         $.ajax({
             url: '/update/photo/profile/'+id,
+            type: 'post',
+            data: data,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function (data) {
+                location.reload();
+            },
+            error: function (data) {
+                console.log(data)
+            }
+
+        });
+    }
+}
+
+
+function updateCommunityImage(id){
+    if ($('#communityImage')[0].files.length>0){
+        let file = $('#profileImage')[0].files[0];
+        let data = new FormData();
+
+        data.append('image', file);
+
+        $.ajax({
+            url: '/update/photo/community/'+id,
             type: 'post',
             data: data,
             contentType: false,

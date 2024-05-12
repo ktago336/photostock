@@ -10,23 +10,26 @@ class LikeController extends Controller
 {
     public function like(Request $request){
         $input = $request->validate([
-            'post_id'=>'required'
+            'likeable_type'=>'required',
+            'likeable_id'=>'required'
         ]);
 
         if (!$user = Auth::user()){
             return response()->json(['success'=>false],403);
         }
 
-        $post_id = $input['post_id'];
+        $likeable_id = $input['likeable_id'];
+        $likeable_type = $input['likeable_type'];
 
-        if ($like = Like::where('post_id', $post_id)->where('user_id',$user->id)->first()){
+        if ($like = Like::where('likeable_id', $likeable_id)->where('likeable_type',$likeable_type)->where('user_id',$user->id)->first()){
             $like->delete();
             return response()->json(['increase'=>false]);
         }
         else{
             $like = new Like();
             $like->user_id = $user->id;
-            $like->post_id = $post_id;
+            $like->likeable_id = $likeable_id;
+            $like->likeable_type = $likeable_type;
             $like->save();
             return response()->json(['increase'=>true]);
         }
