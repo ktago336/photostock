@@ -4,13 +4,13 @@
 
 @section('content')
 
-    <div class="content">
+    <div class="content h-100" >
 
         <div class="top-bar">
             {{$profile->name??''}} {{$profile->surname??''}}
         </div>
-        <div class="container-main" style="margin-top: 0px">
-            <div class="profile-header" style="width: 40%">
+        <div class="d-flex w-100 overflow-y-scroll h-100" style="margin-top: 0px">
+            <div class="profile-header" style="">
                 @if(\Illuminate\Support\Facades\Auth::id() == $profile->id)
                     <label for="profileImage" style="cursor:pointer;">
                         <img class="profile-picture" src="{{$profile->avatar()->url??config('app.profile_placeholder')}}" alt="Profile Picture">
@@ -61,7 +61,7 @@
                     <h4 class="px-3 category-header-title">Фото</h4>
                 </div>
 
-                @include('blocks.gallery',['images'=>$profile->allImages()->get()])
+                @include('blocks.personal-page-gallery',['images'=>$profile->allImages()->get()])
                 <div class="d-flex justify-content-between align-items-end border-bottom border-top border-5 border-dark category-header">
                     <h4 class="px-3 category-header-title">Стена</h4>
                 </div>

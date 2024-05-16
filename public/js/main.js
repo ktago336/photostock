@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded',function (){
 
 
     //Процедура отправки лайка
-    $(".like-btn").on('click',function(){
+    $('body').on('click',".like-btn",function(){
         let likeBtn = $(this);
         let likeable_id = $(this).data('likeableId');
         let likeable_type = $(this).data('likeableType');

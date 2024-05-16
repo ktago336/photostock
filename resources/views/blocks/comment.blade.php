@@ -22,9 +22,13 @@
 
             <div class="d-flex">
 
-                <span class="likes like-btn d-flex" data-likeable-id="{{$post->id}}" data-likeable-type="{{\App\Models\Post::class}}">
+                <span class="likes like-btn d-flex" data-likeable-id="{{$post->id}}" data-likeable-type="{{\App\Models\Comment::class}}">
                 <div class="numberOfLikes">{{$post->likes()->count()}} </div>
-                <div class="like-symbol @if($userLikedPostsIds->where('likeable_type',$post::class)->where('likeable_id',$post->id)->first()) red @endif">&#10084;</div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->liked()->where('likeable_type',$post::class)->where('likeable_id',$post->id)->first())
+                        <div class="like-symbol red"><i class="bi bi-heart-fill"></i></div>
+                    @else
+                        <div class="like-symbol"><i class="bi bi-heart"></i></div>
+                    @endif
 
             </span>
             </div>

@@ -18,10 +18,9 @@ class ProfileController extends Controller
 
     public function userPage($id){
         $profile = User::with('images')->findOrFail($id);
-        $userLikedPostsIds = Like::select('likeable_type','likeable_id','id')->where('user_id',Auth::id())->pluck('likeable_type','likeable_id','id');
         $friendsTotal = $profile->friendsCount();
         $friends = $profile->friends()->latest()->take(9)->get();
-        return view('personal-page',compact('profile','userLikedPostsIds', 'friendsTotal','friends'));
+        return view('personal-page',compact('profile', 'friendsTotal','friends'));
     }
 
 

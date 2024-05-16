@@ -16,7 +16,7 @@ git checkout laravel-branch
 composer install
 cp .env.example .env
 ```
-Make public/ rootDirectory for your webserve<br>
+Make public/ rootDirectory for your webserver<br>
 Change permissions like this
 ```
 sudo chown -R www-data:www-data . #being in root of your project instance

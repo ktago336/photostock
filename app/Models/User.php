@@ -44,6 +44,10 @@ class User extends Authenticatable implements Postable
 
     private $avatar;
 
+
+    private $liked; //TODO caching
+
+
     /**
      * Get the attributes that should be cast.
      *
@@ -55,6 +59,17 @@ class User extends Authenticatable implements Postable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+    public function liked(){
+        if (isset($this->liked)){
+            return $this->liked;
+        }
+        else{
+            $this->liked = Like::select('likeable_type','likeable_id','id')->where('user_id',$this->id)->get();
+            return $this->liked;
+        }
     }
 
 

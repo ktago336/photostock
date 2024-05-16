@@ -14,9 +14,8 @@ class CommunityController extends Controller
     public function communityPage($id){
         $community = Community::findOrFail($id);
         $lastSubscribers = $community->subscribers()->latest()->take(3)->get();
-        $userLikedPostsIds = Like::select('likeable_type','likeable_id','id')->where('user_id',Auth::id())->pluck('likeable_type','likeable_id','id');
 
-        return view('community-page',compact('community','lastSubscribers','userLikedPostsIds'));
+        return view('community-page',compact('community','lastSubscribers'));
     }
 
 

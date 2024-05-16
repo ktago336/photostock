@@ -13,7 +13,6 @@ class CommentController extends Controller
     public function getComments(Request $request){
         $input = $request->input();
 
-        $userLikedPostsIds = Like::select('likeable_type','likeable_id','id')->where('user_id',Auth::id())->where('likeable_type',Comment::class)->pluck('likeable_type','likeable_id','id');
         $commentable = $input['commentable_type']::find($input['commentable_id']);
 
         $comments = $commentable->comments()->with('user')->get();//TODO pagination
@@ -23,7 +22,7 @@ class CommentController extends Controller
         }
         else{
             foreach ($comments as $comment){
-                $cards .= view('blocks.comment',['post' => $comment,'userLikedPostsIds'=>$userLikedPostsIds])->render();
+                $cards .= view('blocks.comment',['post' => $comment])->render();
             }
         }
         //TODO pagination
