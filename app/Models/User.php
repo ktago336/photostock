@@ -221,7 +221,11 @@ class User extends Authenticatable implements Postable
     public function friendsCount(){
         return Friendship::select('id')->where('user_id',$this->id)->orWhere('friend_id',$this->id)->count();
     }
-    
+
+
+    public function subscribersCount(){
+        return Subscription::select('id')->where('subscribeable_id',$this->id)->where('subscribeable_type',self::class)->count();
+    }
 
 
     public function isFriend($id){

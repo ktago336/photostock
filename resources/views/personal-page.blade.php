@@ -32,6 +32,10 @@
                         <h4 class="px-3 category-header-title">Друзья {{$friendsTotal}}</h4>
                     </div>
                     @include('blocks.friends', compact('friends'))
+                    <div class="d-flex justify-content-between align-items-end border-bottom border-top border-5 border-dark category-header" style="margin-top: 2ch">
+                        <h4 class="px-3 category-header-title">Подписчики {{$subscribersTotal}}</h4>
+                    </div>
+                    @include('blocks.friends', compact('subscribers'))
 
             </div>
             <div class="profile-content">

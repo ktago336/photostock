@@ -20,7 +20,10 @@ class ProfileController extends Controller
         $profile = User::with('images')->findOrFail($id);
         $friendsTotal = $profile->friendsCount();
         $friends = $profile->friends()->latest()->take(9)->get();
-        return view('personal-page',compact('profile', 'friendsTotal','friends'));
+
+        $subscribersTotal = $profile->subscribersCount();
+        $subscribers = $profile->subscribers()->latest()->take(9)->get();
+        return view('personal-page',compact('profile', 'friendsTotal','friends','subscribers','subscribersTotal'));
     }
 
 
