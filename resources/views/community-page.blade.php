@@ -6,11 +6,11 @@
 
     <div class="content">
 
-        <div class="container-main" style="margin-top: 0px">
+        <div class="container-main responsive-flex-content" style="margin-top: 0px">
             <div class="profile-header" style="width: 40%">
 
                 @if(\Illuminate\Support\Facades\Auth::id() == $community->user->id)
-                    <label for="profileImage" style="cursor:pointer;">
+                    <label for="communityImage" style="cursor:pointer;">
                         <img class="profile-picture" src="{{$community->avatar()->url??config('app.profile_placeholder')}}" alt="Profile Picture">
                     </label>
                     <input id="communityImage" data-community-id="{{$community->id}}" type="file" accept="image/png, image/jpeg" hidden>

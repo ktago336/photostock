@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',function (){
 
 
     $("#communityImage").on('change', function (){
-        updateCommunityImage($(this).data('userId'));
+        updateCommunityImage($(this).data('communityId'));
     })
 
 
@@ -267,7 +267,7 @@ function updateProfileImage(id){
 
 function updateCommunityImage(id){
     if ($('#communityImage')[0].files.length>0){
-        let file = $('#profileImage')[0].files[0];
+        let file = $('#communityImage')[0].files[0];
         let data = new FormData();
 
         data.append('image', file);
