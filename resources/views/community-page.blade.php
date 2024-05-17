@@ -7,7 +7,7 @@
     <div class="content">
 
         <div class="container-main responsive-flex-content" style="margin-top: 0px">
-            <div class="profile-header" style="width: 40%">
+            <div class="profile-header">
 
                 @if(\Illuminate\Support\Facades\Auth::id() == $community->user->id)
                     <label for="communityImage" style="cursor:pointer;">
