@@ -18,6 +18,11 @@
 {{--@include('app.footer')--}}
 
 </body>
-</html>
 
+<!-- Modal -->
+
+@include('modals.comments')
+
+<!-- Modal -->
+</html>
 

@@ -10,8 +10,3 @@
 </footer>
 
 
-<!-- Modal -->
-
-@include('modals.comments')
-
-<!-- Modal -->
