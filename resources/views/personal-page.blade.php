@@ -9,7 +9,7 @@
         <div class="top-bar">
             {{$profile->name??''}} {{$profile->surname??''}}
         </div>
-        <div class="d-flex w-100 overflow-y-scroll h-100" style="margin-top: 0px">
+        <div class="d-flex w-100 h-100 responsive-flex-content" style="margin-top: 0px;">
             <div class="profile-header" style="">
                 @if(\Illuminate\Support\Facades\Auth::id() == $profile->id)
                     <label for="profileImage" style="cursor:pointer;">

@@ -471,3 +471,15 @@ body {
     height: 10ch;
     width: 10ch;
 }
+
+
+@media (min-width:600px) {
+    .responsive-flex-content{
+        flex-direction: row;
+    }
+}
+@media (max-width:600px) {
+    .responsive-flex-content{
+        flex-direction: column;
+    }
+}

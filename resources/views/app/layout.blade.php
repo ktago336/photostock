@@ -1,21 +1,21 @@
 @include('app.head')
 
-<body>
+<body class="d-flex flex-column">
 @include('app.header')
 
-<div class="container-fluid">
+<main class="" style="flex: 1">
     <div class="row w-100 flex-nowrap">
         @auth()
             @include('app.menus.sidebar')
         @endauth
 
-        <div class="h-100 overflow-y-scroll" style="flex-shrink: unset">
+        <div class="h-100" style="flex-shrink: unset; padding-right: 0px">
             @yield('content')
         </div>
     </div>
-</div>
+</main>
 
-@include('app.footer')
+{{--@include('app.footer')--}}
 
 </body>
 </html>

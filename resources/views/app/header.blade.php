@@ -1,4 +1,4 @@
-<header class="border-bottom header">
+<header class="border-bottom header sticky-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <a href="{{route('feed')}}" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
             <img height="50px" src="/svg/logo-wide.svg">

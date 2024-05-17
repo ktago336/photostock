@@ -1,5 +1,5 @@
-<footer>
-    <nav class="footer fixed-bottom">
+<footer class="footer sticky-bottom">
+    <nav class="footer">
         <div class="footer-content">
             <a class="footer-link" href="#">Privacy Policy</a>
             <a class="footer-link" href="#">Terms of Service</a>
