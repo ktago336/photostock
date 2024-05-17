@@ -39,20 +39,12 @@
     <!-- More feed items go here -->
     </div>
     <script>
+        window.scrollTo(0, document.body.scrollHeight);
         const to_id = {{$to_id}};
         const ProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->url}}';
         const TheirProfileImage = '{{\Illuminate\Support\Facades\Auth::user()->avatar()->url}}';
         const TheirName = '{{$chatWith->name}}';
         const TheirImage = '{{$chatWith->avatar()->url}}';
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded',function (){
-            window.Echo.private(`messages.{{\Illuminate\Support\Facades\Auth::id()}}`) //
-                .listen('MessageSent', (e) => {
-                    console.log(e);
-                    addMessage(false, e.message.text, TheirName, TheirImage, 'Только что');
-                });
-        })
     </script>
 
 @endsection
