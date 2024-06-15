@@ -22,6 +22,7 @@
 <!-- Modal -->
 
 @include('modals.comments')
+@include('modals.notifications')
 
 <!-- Modal -->
 </html>

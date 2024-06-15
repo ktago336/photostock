@@ -163,9 +163,22 @@ console.log(form.data('commentableType'));
     })
 
     //Обработка отрпавки сообщения
-    $("#sendMessage").on('click',function (){
-        sendMessage();
-    })
+    $('body').on("keypress", function(e) {
+        var key = e.keyCode;
+        console.log('qwe');
+        if (key == 13 && $("#textToSend").is(':focus-within')) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+
+    //Notifications
+    $( ".alert-close" ).click(function() {
+        $( this ).parent().parent().fadeOut();
+    });
+
+
 });
 //Добавление сообщения в чат
 function addMessage(me, text, name, image, time){
@@ -291,4 +304,6 @@ function updateCommunityImage(id){
         });
     }
 }
+
+
 

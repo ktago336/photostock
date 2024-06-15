@@ -483,3 +483,16 @@ body {
         flex-direction: column;
     }
 }
+
+.alert{
+    background-color: rgba(78, 65, 65, 0.8);
+    padding: 20px;
+    border-radius: 50px;
+    color: white;
+    z-index: 99999;
+    display:none;
+    position: fixed;
+    top: 130px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
